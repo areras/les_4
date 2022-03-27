@@ -1,23 +1,50 @@
 package les_4;
-public class Cat extends Animal {
 
-    private static int count; // счетчик количества созданных животных класса Cat
-
-    public Cat(String type, String name, int run, int sweem) {
-
-        this.type = type;
+class Cat {
+    private String name;
+    private int appetite;
+    public Cat(String name, int appetite) {
         this.name = name;
-        this.run = run;
-        this.sweem = sweem;
-        count++;
+        this.appetite = appetite;
+    }
+    public void eat(Plate p) {
+        p.decreaseFood(appetite);
+    }
+    public void satiety (Plate p) {
+        System.out.print(name+" ");
+        p.fill(appetite);
+    }
+}
+
+class Plate {
+    private int food;
+    public Plate(int food) {
+        this.food = food;
+    }
+    public void decreaseFood(int amount) {
+        if (amount<=food){
+            food -= amount;
+            System.out.println("Сытый");
+        } else {
+            System.out.println("Не сможет есть, ему мало");
+        }
+    }
+    public boolean fill (int amount) {
+        if (amount<=food){
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public static int getCount() {
-        return count;
+    public void info() {
+        System.out.println("Колличество еды: " + food);
     }
-    //выводим информацию в консоль
-    public void catInfo() {
-        System.out.println("CatName: " + name + " /RunLimit: " + run+ " meters/" + " /Sweem:" + sweem +  " meters/");
+    public void setFood(int newfood){
+        System.out.println("Добавим в миску " + newfood);
+        food += newfood;
     }
 
 }
+
+
